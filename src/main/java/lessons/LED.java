@@ -1,7 +1,6 @@
 package lessons;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.BitSet;
 
 /**
@@ -70,13 +69,13 @@ import java.util.BitSet;
 public class LED {
 
 	private final BitSet pixels = new BitSet(7);
-	private final ByteArrayOutputStream deviceStream;
-	
-	public LED(ByteArrayOutputStream outputStream) {
-		if (outputStream == null)
-			throw new IllegalArgumentException("output stream cannot be null");
-		
-		deviceStream = outputStream;
+	private final ByteBuffer deviceBuffer;
+
+	public LED(ByteBuffer outputBuffer) {
+		if (outputBuffer == null)
+			throw new IllegalArgumentException("outputBuffer cannot be null");
+
+		deviceBuffer = outputBuffer;
 	}
 
 	public boolean display(char value) {
@@ -108,171 +107,130 @@ public class LED {
 
 	private boolean set0() {
 		// 0 1110111
-		try {
-			pixels.set(0);
-			pixels.set(1);
-			pixels.set(2);
-			pixels.clear(3);
-			pixels.set(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			deviceStream.flush();
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.set(1);
+		pixels.set(2);
+		pixels.clear(3);
+		pixels.set(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set1() {
 		// 1 0010010
-		try {
-			pixels.clear(0);
-			pixels.clear(1);
-			pixels.set(2);
-			pixels.clear(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.clear(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.clear(0);
+		pixels.clear(1);
+		pixels.set(2);
+		pixels.clear(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.clear(6);
+		return deviceOut();
 	}
 
 	private boolean set2() {
 		// 2 1011101
-		try {
-			pixels.set(0);
-			pixels.clear(1);
-			pixels.set(2);
-			pixels.set(3);
-			pixels.set(4);
-			pixels.clear(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.clear(1);
+		pixels.set(2);
+		pixels.set(3);
+		pixels.set(4);
+		pixels.clear(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set3() {
 		// 3 1011011
-		try {
-			pixels.set(0);
-			pixels.clear(1);
-			pixels.set(2);
-			pixels.set(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.clear(1);
+		pixels.set(2);
+		pixels.set(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set4() {
 		// 4 0111010
-		try {
-			pixels.clear(0);
-			pixels.set(1);
-			pixels.set(2);
-			pixels.set(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.clear(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.clear(0);
+		pixels.set(1);
+		pixels.set(2);
+		pixels.set(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.clear(6);
+		return deviceOut();
 	}
 
 	private boolean set5() {
 		// 5 1101011
-		try {
-			pixels.set(0);
-			pixels.set(1);
-			pixels.clear(2);
-			pixels.set(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.set(1);
+		pixels.clear(2);
+		pixels.set(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set6() {
 		// 6 0101111
-		try {
-			pixels.clear(0);
-			pixels.set(1);
-			pixels.clear(2);
-			pixels.set(3);
-			pixels.set(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.clear(0);
+		pixels.set(1);
+		pixels.clear(2);
+		pixels.set(3);
+		pixels.set(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set7() {
 		// 7 1010010
-		try {
-			pixels.set(0);
-			pixels.clear(1);
-			pixels.set(2);
-			pixels.clear(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.clear(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.clear(1);
+		pixels.set(2);
+		pixels.clear(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.clear(6);
+		return deviceOut();
 	}
 
 	private boolean set8() {
 		// 8 1111111
-		try {
-			pixels.set(0);
-			pixels.set(1);
-			pixels.set(2);
-			pixels.set(3);
-			pixels.set(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
-			return true;
-		} catch (IOException ioEx) {
-			return false;
-		}
+		pixels.set(0);
+		pixels.set(1);
+		pixels.set(2);
+		pixels.set(3);
+		pixels.set(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
 	}
 
 	private boolean set9() {
 		// 9 1111011
+		pixels.set(0);
+		pixels.set(1);
+		pixels.set(2);
+		pixels.set(3);
+		pixels.clear(4);
+		pixels.set(5);
+		pixels.set(6);
+		return deviceOut();
+	}
+
+	private boolean deviceOut() {
 		try {
-			pixels.set(0);
-			pixels.set(1);
-			pixels.set(2);
-			pixels.set(3);
-			pixels.clear(4);
-			pixels.set(5);
-			pixels.set(6);
-			deviceStream.write(pixels.toByteArray());
+			deviceBuffer.clear();
+			deviceBuffer.put(pixels.toByteArray());
 			return true;
-		} catch (IOException ioEx) {
+		} catch (Exception ex) {
 			return false;
 		}
 	}
