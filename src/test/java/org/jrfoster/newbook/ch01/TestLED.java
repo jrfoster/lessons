@@ -1,5 +1,5 @@
 
-package lessons;
+package org.jrfoster.newbook.ch01;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.nio.ByteBuffer;
 
+import org.jrfoster.newbook.ch01.LED;
 import org.junit.Test;
 
 public class TestLED {

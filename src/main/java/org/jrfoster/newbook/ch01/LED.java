@@ -1,5 +1,5 @@
 
-package lessons;
+package org.jrfoster.newbook.ch01;
 
 import java.nio.ByteBuffer;
 import java.util.BitSet;
